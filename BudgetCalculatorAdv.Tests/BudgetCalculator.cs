@@ -6,11 +6,12 @@ namespace BudgetCalculatorAdv.Tests
     public class BudgetCalculator
     {
         private readonly IBudgetRepository _budgetRepository;
+
         public BudgetCalculator(IBudgetRepository budgetRepository)
         {
             _budgetRepository = budgetRepository;
         }
-        
+
         public decimal TotalAmount(DateTime start, DateTime end)
         {
             var budgets = _budgetRepository.GetAll();
@@ -18,10 +19,14 @@ namespace BudgetCalculatorAdv.Tests
 
             if (budgets.Any())
             {
-                var budget = budgets[0];
-                return budget.EffectiveAmount(period);
+                var totalAmount = 0m;
+                foreach (var budget in budgets)
+                {
+                    totalAmount += budget.EffectiveAmount(period);
+                }
+                return totalAmount;
             }
-            
+
             return 0;
         }
     }

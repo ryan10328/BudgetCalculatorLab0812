@@ -130,6 +130,25 @@ namespace BudgetCalculatorAdv.Tests
             });
             TotalAmountShouldBe("20180301", "20180302", 20);
         }
+        
+        [TestMethod]
+        public void Multiple_Budgets()
+        {
+            _budgetRepository.GetAll().Returns(new List<Budget>
+            {
+                new Budget
+                {
+                    YearMonth = "201803",
+                    Amount = 310
+                },
+                new Budget
+                {
+                    YearMonth = "201804",
+                    Amount = 30
+                }
+            });
+            TotalAmountShouldBe("20180331", "20180401", 11);
+        }
 
 
         private void TotalAmountShouldBe(string start, string end, decimal expected)
