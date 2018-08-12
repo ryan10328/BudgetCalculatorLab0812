@@ -13,19 +13,21 @@ namespace BudgetCalculatorAdv.Tests
             End = end;
         }
 
-        public int Days()
-        {
-            return (End - Start).Days + 1;
-        }
-
         public decimal OverlappingDays(Budget budget)
         {
-            if (End < budget.StartDay || Start > budget.LastDay)
+            if (HasNoOverlapping(budget))
             {
                 return 0;
             }
 
-            return Days();
+            var effectiveEnd = budget.LastDay < End ? budget.LastDay : End;
+
+            return (effectiveEnd - Start).Days + 1;
+        }
+
+        private bool HasNoOverlapping(Budget budget)
+        {
+            return End < budget.StartDay || Start > budget.LastDay;
         }
     }
 }

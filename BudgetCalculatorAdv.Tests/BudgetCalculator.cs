@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace BudgetCalculatorAdv.Tests
 {
     public class BudgetCalculator
     {
-        private IBudgetRepository _budgetRepository;
+        private readonly IBudgetRepository _budgetRepository;
         public BudgetCalculator(IBudgetRepository budgetRepository)
         {
             _budgetRepository = budgetRepository;
