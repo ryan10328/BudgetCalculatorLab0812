@@ -21,8 +21,8 @@ namespace BudgetCalculatorAdv.Tests
             }
 
             var effectiveEnd = budget.LastDay < End ? budget.LastDay : End;
-
-            return (effectiveEnd - Start).Days + 1;
+            var effectiveStart = budget.StartDay > Start ? budget.StartDay : Start;
+            return (effectiveEnd - effectiveStart).Days + 1;
         }
 
         private bool HasNoOverlapping(Budget budget)
