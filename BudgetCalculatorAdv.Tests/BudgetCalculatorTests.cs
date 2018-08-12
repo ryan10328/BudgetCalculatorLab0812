@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BudgetCalculatorAdv.Tests
@@ -13,8 +14,11 @@ namespace BudgetCalculatorAdv.Tests
         public void NoBudget()
         {
             var sut = new BudgetCalculator();
-            var actual = sut.TotalAmount("20180301", "20180301");
+            var startDate = DateTime.ParseExact("20180301", "yyyyMMdd", null);
+            var endDate = DateTime.ParseExact("20180301", "yyyyMMdd", null);
+            var actual = sut.TotalAmount(startDate, endDate);
             Assert.AreEqual(0, actual);
         }
+
     }
 }
