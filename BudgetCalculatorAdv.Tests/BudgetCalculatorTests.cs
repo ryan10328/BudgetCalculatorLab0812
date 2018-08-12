@@ -87,7 +87,7 @@ namespace BudgetCalculatorAdv.Tests
             });
             TotalAmountShouldBe("20180331", "20180401", 1);
         }
-        
+
         [TestMethod]
         public void Overlap_Period_BudgetFirstDay()
         {
@@ -100,6 +100,21 @@ namespace BudgetCalculatorAdv.Tests
                 }
             });
             TotalAmountShouldBe("20180228", "20180301", 1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Invalid_Date()
+        {
+            _budgetRepository.GetAll().Returns(new List<Budget>
+            {
+                new Budget
+                {
+                    YearMonth = "201803",
+                    Amount = 31
+                }
+            });
+            _calculator.TotalAmount(DateTime.ParseExact("20180402", "yyyyMMdd", null), DateTime.ParseExact("20180401", "yyyyMMdd", null));
         }
 
 
