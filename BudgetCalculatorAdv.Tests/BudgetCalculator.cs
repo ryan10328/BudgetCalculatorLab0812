@@ -14,10 +14,11 @@ namespace BudgetCalculatorAdv.Tests
         public decimal TotalAmount(DateTime start, DateTime end)
         {
             var budgets = _budgetRepository.GetAll();
+            var period = new Period(start, end);
 
             if (budgets.Any())
             {
-                return (end - start).Days + 1;
+                return period.Days();
             }
             
             return 0;
