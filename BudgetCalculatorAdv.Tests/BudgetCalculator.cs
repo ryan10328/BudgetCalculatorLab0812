@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BudgetCalculatorAdv.Tests
@@ -18,17 +19,8 @@ namespace BudgetCalculatorAdv.Tests
 
             if (budgets.Any())
             {
-                if (period.End < budgets[0].StartDay)
-                {
-                    return 0;
-                }
-                
-                if (period.Start > budgets[0].LastDay)
-                {
-                    return 0;
-                }
-                
-                return period.Days();
+                var budget = budgets[0];
+                return period.OverlappingDays(budget);
             }
             
             return 0;

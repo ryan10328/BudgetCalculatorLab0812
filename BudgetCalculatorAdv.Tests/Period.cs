@@ -17,5 +17,15 @@ namespace BudgetCalculatorAdv.Tests
         {
             return (End - Start).Days + 1;
         }
+
+        public decimal OverlappingDays(Budget budget)
+        {
+            if (End < budget.StartDay || Start > budget.LastDay)
+            {
+                return 0;
+            }
+
+            return Days();
+        }
     }
 }
