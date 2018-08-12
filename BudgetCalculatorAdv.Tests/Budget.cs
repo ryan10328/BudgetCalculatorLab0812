@@ -7,7 +7,7 @@ namespace BudgetCalculatorAdv.Tests
         public string YearMonth { get; set; }
         public decimal Amount { get; set; }
 
-        public DateTime LastDay => DateTime.ParseExact($"{YearMonth}{DaysInMonth}", "yyyyMMdd", null);
+        public DateTime EndDay => DateTime.ParseExact($"{YearMonth}{DaysInMonth}", "yyyyMMdd", null);
         public DateTime StartDay => DateTime.ParseExact($"{YearMonth}01", "yyyyMMdd", null);
         public int DaysInMonth => DateTime.DaysInMonth(int.Parse(YearMonth.Substring(0, 4)), int.Parse(YearMonth.Substring(4, 2)));
 
@@ -18,7 +18,12 @@ namespace BudgetCalculatorAdv.Tests
 
         public decimal EffectiveAmount(Period period)
         {
-            return period.OverlappingDays(this) * DailyAmount();
+            return period.OverlappingDays(CreatePeriod()) * DailyAmount();
+        }
+
+        private Period CreatePeriod()
+        {
+            return new Period(StartDay, EndDay);
         }
     }
 }
