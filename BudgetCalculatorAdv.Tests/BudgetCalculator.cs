@@ -16,18 +16,7 @@ namespace BudgetCalculatorAdv.Tests
         {
             var budgets = _budgetRepository.GetAll();
             var period = new Period(start, end);
-
-            if (budgets.Any())
-            {
-                var totalAmount = 0m;
-                foreach (var budget in budgets)
-                {
-                    totalAmount += budget.EffectiveAmount(period);
-                }
-                return totalAmount;
-            }
-
-            return 0;
+            return budgets.Any() ? budgets.Sum(budget => budget.EffectiveAmount(period)) : 0;
         }
     }
 }
