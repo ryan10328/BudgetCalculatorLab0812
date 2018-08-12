@@ -19,7 +19,7 @@ namespace BudgetCalculatorAdv.Tests
             if (budgets.Any())
             {
                 var budget = budgets[0];
-                return period.OverlappingDays(budget) * budget.DailyAmount();
+                return budget.EffectiveAmount(period);
             }
             
             return 0;

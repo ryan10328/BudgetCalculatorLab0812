@@ -15,5 +15,10 @@ namespace BudgetCalculatorAdv.Tests
         {
             return Amount / DaysInMonth;
         }
+
+        public decimal EffectiveAmount(Period period)
+        {
+            return period.OverlappingDays(this) * DailyAmount();
+        }
     }
 }
