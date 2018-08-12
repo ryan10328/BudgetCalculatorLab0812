@@ -60,6 +60,20 @@ namespace BudgetCalculatorAdv.Tests
             TotalAmountShouldBe("20180401", "20180401", 0);
         }
 
+        [TestMethod]
+        public void No_Overlap_Period_BeforeBudgetFirstDay()
+        {
+            _budgetRepository.GetAll().Returns(new List<Budget>
+            {
+                new Budget
+                {
+                    YearMonth = "201803",
+                    Amount = 31
+                }
+            });
+            TotalAmountShouldBe("20180228", "20180228", 0);
+        }
+
 
         private void TotalAmountShouldBe(string start, string end, decimal expected)
         {

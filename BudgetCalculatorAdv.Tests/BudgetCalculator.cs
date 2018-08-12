@@ -18,6 +18,11 @@ namespace BudgetCalculatorAdv.Tests
 
             if (budgets.Any())
             {
+                if (period.End < budgets[0].StartDay)
+                {
+                    return 0;
+                }
+                
                 if (period.Start > budgets[0].LastDay)
                 {
                     return 0;

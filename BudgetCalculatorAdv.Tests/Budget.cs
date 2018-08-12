@@ -15,5 +15,7 @@ namespace BudgetCalculatorAdv.Tests
                 return DateTime.ParseExact($"{YearMonth}{daysInMonth}", "yyyyMMdd", null);
             }
         }
+
+        public DateTime StartDay => DateTime.ParseExact($"{YearMonth}01", "yyyyMMdd", null);
     }
 }
